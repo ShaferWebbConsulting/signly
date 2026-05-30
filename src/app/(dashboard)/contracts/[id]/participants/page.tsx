@@ -17,8 +17,8 @@ export default async function ContractParticipantsPage({ params }: { params: Pro
   return (
     <Card>
       <CardHeader>
-        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-white">Participants · {contract.title}</h1>
-        <p className="text-sm text-zinc-500">Add, remove, and sequence everyone who needs to review or sign.</p>
+        <h1 className="text-2xl font-semibold text-slate-950 dark:text-white">Participants · {contract.title}</h1>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">Add, remove, and sequence everyone who needs to review or sign.</p>
       </CardHeader>
       <CardContent>
         <ParticipantForm contractId={contract.id} participants={contract.participants} />

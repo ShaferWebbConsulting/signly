@@ -28,7 +28,7 @@ export function SignaturePad({ onChange }: { onChange: (value: string) => void }
 
   return (
     <div className="space-y-3">
-      <canvas ref={canvasRef} className="h-[220px] w-full rounded-2xl border border-dashed border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-950" />
+      <canvas ref={canvasRef} className="h-[220px] w-full rounded-2xl border border-dashed border-slate-300 bg-white dark:border-zinc-700 dark:bg-zinc-950" />
       <Button variant="outline" size="sm" onClick={() => { padRef.current?.clear(); onChange(""); }}>Clear</Button>
     </div>
   );
