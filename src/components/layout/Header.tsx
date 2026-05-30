@@ -16,7 +16,11 @@ export function Header({ user }: { user: { name?: string | null; email?: string 
     if (process.env.NODE_ENV === "development") {
       console.log("[Header] signOut triggered");
     }
-    await signOut({ callbackUrl: "/login" });
+    try {
+      await signOut({ callbackUrl: "/login" });
+    } finally {
+      setSigningOut(false);
+    }
   };
 
   return (

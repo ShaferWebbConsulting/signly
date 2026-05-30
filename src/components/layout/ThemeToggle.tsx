@@ -11,7 +11,7 @@ export function ThemeToggle() {
   const toggle = () => {
     const next = dark ? "light" : "dark";
     if (process.env.NODE_ENV === "development") {
-      console.log("[ThemeToggle] switching to:", next, "| html.dark:", document.documentElement.classList.contains("dark"));
+      console.log("[ThemeToggle] switching to:", next);
     }
     setTheme(next);
   };
