@@ -15,5 +15,5 @@ export function Avatar({ name, src, className }: { name?: string | null; src?: s
     );
   }
 
-  return <div className={cn("flex h-10 w-10 items-center justify-center rounded-full bg-indigo-500/15 text-sm font-semibold text-indigo-500", className)}>{initials}</div>;
+  return <div className={cn("flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 text-sm font-semibold text-blue-700 dark:bg-violet-500/15 dark:text-violet-300", className)}>{initials}</div>;
 }

@@ -24,10 +24,10 @@ export function Header({ user }: { user: { name?: string | null; email?: string 
   };
 
   return (
-    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-zinc-200 bg-white/80 px-4 py-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 lg:px-8">
+    <header className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 bg-white px-4 py-4 dark:border-zinc-800 dark:bg-zinc-950/70 lg:px-8">
       <div>
-        <p className="text-sm text-zinc-500">Welcome back</p>
-        <h1 className="text-xl font-semibold text-zinc-950 dark:text-white">Manage every contract from one workspace.</h1>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">Welcome back</p>
+        <h1 className="text-xl font-semibold text-slate-950 dark:text-white">Manage every contract from one workspace.</h1>
       </div>
       <div className="flex items-center gap-3">
         <ThemeToggle />
@@ -42,18 +42,18 @@ export function Header({ user }: { user: { name?: string | null; email?: string 
         </Button>
         <Dropdown
           trigger={
-            <button className="flex items-center gap-3 rounded-xl border border-zinc-200 px-3 py-2 dark:border-zinc-800">
+            <button className="flex items-center gap-3 rounded-xl border border-slate-200 px-3 py-2 dark:border-zinc-800">
               <Avatar name={user.name} src={user.image} />
               <div className="text-left">
-                <p className="text-sm font-medium text-zinc-950 dark:text-white">{user.name ?? user.email ?? "Signly user"}</p>
-                <p className="text-xs text-zinc-500">{user.stripePlan ?? "FREE"} plan</p>
+                <p className="text-sm font-medium text-slate-950 dark:text-white">{user.name ?? user.email ?? "Signly user"}</p>
+                <p className="text-xs text-slate-500 dark:text-zinc-400">{user.stripePlan ?? "FREE"} plan</p>
               </div>
-              <ChevronDown className="h-4 w-4 text-zinc-500" />
+              <ChevronDown className="h-4 w-4 text-slate-500 dark:text-zinc-400" />
             </button>
           }
         >
           <div className="space-y-1 text-sm">
-            <p className="px-3 py-2 text-zinc-500">{user.email}</p>
+            <p className="px-3 py-2 text-slate-500 dark:text-zinc-400">{user.email}</p>
           </div>
         </Dropdown>
       </div>

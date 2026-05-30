@@ -38,8 +38,8 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-white">Sign in</h1>
-        <p className="text-sm text-zinc-500">Continue managing contracts, approvals, and audit-ready signatures.</p>
+        <h1 className="text-2xl font-semibold text-slate-950 dark:text-white">Sign in</h1>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">Continue managing contracts, approvals, and audit-ready signatures.</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">
@@ -52,10 +52,10 @@ export function LoginForm() {
         </div>
         <Button className="w-full" onClick={submit} disabled={isPending}>{isPending ? "Signing in..." : "Sign in"}</Button>
       </CardContent>
-      <CardFooter className="flex flex-col items-start gap-2 text-sm text-zinc-500">
-        <Link href="/forgot-password" className="text-indigo-500">Forgot your password?</Link>
+      <CardFooter className="flex flex-col items-start gap-2 text-sm text-slate-500 dark:text-zinc-400">
+        <Link href="/forgot-password" className="text-blue-600 hover:text-blue-700 dark:text-violet-400 dark:hover:text-violet-300">Forgot your password?</Link>
         <p>
-          Need an account? <Link href="/register" className="text-indigo-500">Create one</Link>
+          Need an account? <Link href="/register" className="text-blue-600 hover:text-blue-700 dark:text-violet-400 dark:hover:text-violet-300">Create one</Link>
         </p>
       </CardFooter>
     </Card>

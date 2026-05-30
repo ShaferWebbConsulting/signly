@@ -13,8 +13,8 @@ export function ForgotPasswordForm() {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <h1 className="text-2xl font-semibold text-zinc-950 dark:text-white">Forgot password</h1>
-        <p className="text-sm text-zinc-500">Password reset emails are coming soon. We will still capture your request.</p>
+        <h1 className="text-2xl font-semibold text-slate-950 dark:text-white">Forgot password</h1>
+        <p className="text-sm text-slate-500 dark:text-zinc-400">Password reset emails are coming soon. We will still capture your request.</p>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="space-y-2">

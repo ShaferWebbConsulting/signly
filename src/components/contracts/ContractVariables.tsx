@@ -22,14 +22,14 @@ export function ContractVariables({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-semibold text-zinc-950 dark:text-white">Dynamic variables</h3>
-          <p className="text-sm text-zinc-500">Add reusable placeholders like client_name or effective_date.</p>
+          <h3 className="text-sm font-semibold text-slate-950 dark:text-white">Dynamic variables</h3>
+          <p className="text-sm text-slate-500 dark:text-zinc-400">Add reusable placeholders like client_name or effective_date.</p>
         </div>
         <Button variant="outline" size="sm" onClick={() => onChange([...value, { id: nanoid(), key: "", value: "" }])}>Add variable</Button>
       </div>
       <div className="grid gap-3">
         {value.map((variable) => (
-          <div key={variable.id} className="grid gap-3 rounded-2xl border border-zinc-200 p-4 dark:border-zinc-800 lg:grid-cols-[1fr_1fr_auto]">
+          <div key={variable.id} className="grid gap-3 rounded-2xl border border-slate-200 p-4 dark:border-zinc-800 lg:grid-cols-[1fr_1fr_auto]">
             <div>
               <Label htmlFor={`${variable.id}-key`}>Key</Label>
               <Input id={`${variable.id}-key`} value={variable.key} onChange={(event) => updateVariable(variable.id, { key: event.target.value })} placeholder="client_name" />

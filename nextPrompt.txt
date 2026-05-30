@@ -1,0 +1,248 @@
+Fix and complete the Signly contract sending, recipient workflow, local setup docs, and containerized development environment.
+
+Product direction:
+Signly is a web-native contract signing platform. It should allow a contract owner to create a contract, send it to a recipient by email, and allow the recipient to sign online. Recipients should be able to access contracts through a secure signing link or through their own account if they register/login with the same email address.
+
+Signly is NOT a PDF/DOCX signing app. Do not add PDF upload as part of this task.
+
+Current problems:
+
+1. When I create a contract and enter a recipient email, no email or text message is sent.
+2. When I create another account using the same name/email as the recipient, that user does not see the contract in their dashboard.
+3. The project needs clear setup documentation.
+4. The project needs to be easy to run locally using containers.
+
+Implement the following:
+
+1. Contract participant logic
+
+* When a contract is sent, create one or more `ContractParticipant` records.
+* Each participant must include:
+
+  * contractId
+  * name
+  * email
+  * role = SIGNER
+  * signingOrder
+  * status = PENDING
+  * unique secure token
+* Do not require the recipient to already have an account.
+* Normalize participant emails to lowercase.
+* Match recipient dashboard contracts by participant email, not only by ownerId.
+
+2. Sending workflow
+
+* Add or fix API route:
+  `POST /api/contracts/[id]/send`
+* The route should:
+
+  * Verify the logged-in user owns the contract.
+  * Validate recipient name/email.
+  * Create/update participant records.
+  * Generate secure signing token using `crypto.randomBytes`.
+  * Mark contract status as SENT.
+  * Create audit event: CONTRACT_SENT.
+  * Return the signing link in the JSON response for local development.
+
+3. Email delivery
+
+* Use Resend for email delivery.
+* Add environment variable:
+  `RESEND_API_KEY`
+* Add optional variable:
+  `EMAIL_FROM`
+* Create reusable mail service:
+  `src/lib/email.ts`
+* When a contract is sent, email the recipient a signing link:
+  `/sign/{token}` or `/contracts/sign/{token}`
+* In local development, if `RESEND_API_KEY` is missing, do not fail the send request. Instead:
+
+  * Log the signing link to the terminal.
+  * Return the signing link in the API response.
+  * Show the signing link in the UI so I can test manually.
+* Do not implement SMS yet.
+* Add a placeholder SMS service interface for future support.
+* Make the UI say “Email sent” not “Text sent” unless SMS is actually implemented.
+
+4. Recipient dashboard
+
+* Update dashboard queries so users see two sections:
+
+  * “My Contracts” = contracts where `ownerId` equals logged-in user id
+  * “Contracts Sent to Me” = contracts where a `ContractParticipant.email` matches the logged-in user’s email
+* Matching should be case-insensitive.
+* A recipient account should see contracts sent to their email even if the participant record was created before they registered.
+* Add status badges: Pending, Viewed, Signed, Finalized.
+
+5. Signing page
+
+* Create or fix route:
+  `/sign/[token]`
+* The signing page should:
+
+  * Look up `ContractParticipant` by token.
+  * Load the contract.
+  * Mark participant status as VIEWED when opened.
+  * Create audit event: CONTRACT_VIEWED.
+  * Show the contract content in read-only mode.
+  * Allow typed signature and drawn signature.
+  * On submit:
+
+    * Create Signature record.
+    * Set participant status to SIGNED.
+    * Set signedAt timestamp.
+    * Capture IP address and user agent.
+    * Create audit event: CONTRACT_SIGNED.
+    * If all required participants have signed, set contract status to FINALIZED and finalizedAt timestamp.
+    * Generate SHA-256 hash of final contract content/signature state.
+    * Create ContractSnapshot record if applicable.
+
+6. UI updates
+
+* On the contract detail page, add a clear “Send Contract” button.
+* Let owner enter recipient name and email.
+* After sending, show:
+
+  * recipient status
+  * signing link in dev mode
+  * copy link button
+* On dashboard, show both owned contracts and received contracts.
+* Make sure the recipient can click a received contract and sign it.
+
+7. Security
+
+* Signing tokens must be random and unguessable.
+* Only the owner can send/edit their own draft contracts.
+* Once a contract is sent or finalized, prevent unsafe editing unless explicitly allowed.
+* A recipient can only sign using their participant token or their matching authenticated email.
+* Do not expose other users’ contracts.
+* Keep contract content web-native as JSON/HTML.
+
+8. Docker/containerized local development
+   Add the following files if they do not already exist:
+
+* `Dockerfile`
+* `docker-compose.yml`
+* `.dockerignore`
+* `.env.example`
+
+`docker-compose.yml` should include:
+
+* Next.js app service
+* PostgreSQL service
+* Optional local mail/dev email service if useful, such as Mailpit
+
+PostgreSQL service:
+
+* image: postgres:16
+* database: signly
+* user: postgres
+* password: password
+* exposed on port 5432
+* persistent volume
+
+App service:
+
+* builds from Dockerfile
+* runs development server
+* exposes port 3000
+* depends on postgres
+* uses DATABASE_URL pointing to postgres container host, not localhost:
+  `postgresql://postgres:password@postgres:5432/signly`
+* mounts project source for local development if appropriate
+* runs `npm install` if needed
+* supports `npm run dev`
+
+Add clear commands:
+
+* `docker compose up --build`
+* `docker compose down`
+* `docker compose down -v`
+* `docker compose exec app npx prisma db push`
+* `docker compose exec app npx prisma studio`
+
+9. Documentation
+   Update or create a strong `README.md` with the following sections:
+
+* What Signly is
+* What Signly is not
+* Tech stack
+* Local development without Docker
+* Local development with Docker
+* Environment variables
+* Database setup
+* Prisma setup for Prisma 7
+* Authentication setup
+* Email setup using Resend
+* Local email testing behavior when Resend is missing
+* Stripe setup
+* AWS setup checklist
+* Future blockchain/decentralized storage notes
+* Troubleshooting
+
+10. AWS setup documentation
+    Create a separate doc:
+    `docs/AWS_SETUP.md`
+
+Explain what AWS resources may be needed later:
+
+* AWS account
+* IAM user or role
+* S3 bucket for finalized encrypted contract snapshots
+* Optional KMS key for encryption
+* RDS PostgreSQL for production
+* Secrets Manager or SSM Parameter Store for environment variables
+* CloudWatch logs
+* Route 53/domain setup if deploying on AWS
+* SES as a possible future email alternative, though Resend is preferred for now
+
+Make it clear AWS is optional for local development.
+
+11. Production deployment documentation
+    Create:
+    `docs/DEPLOYMENT.md`
+
+Include deployment options:
+
+* Vercel + Neon/Supabase/Railway Postgres
+* AWS App Runner/ECS + RDS
+* Docker-based VPS deployment
+
+Include required production environment variables:
+
+* DATABASE_URL
+* AUTH_SECRET
+* NEXTAUTH_URL or AUTH_URL depending on Auth.js version
+* RESEND_API_KEY
+* EMAIL_FROM
+* STRIPE_SECRET_KEY
+* STRIPE_WEBHOOK_SECRET
+* NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+* AWS variables if storage is enabled
+
+12. Future blockchain architecture documentation
+    Create:
+    `docs/BLOCKCHAIN_ANCHORING.md`
+
+Explain:
+
+* Do not store full contract contents on-chain.
+* Store only final contract hash, timestamp, signer verification metadata, and encrypted storage pointer.
+* Full contract content should remain encrypted off-chain.
+* Later options may include Base, Polygon, Arbitrum, Optimism, Filecoin, Arweave, or IPFS.
+* Blockchain anchoring is not required for MVP.
+
+13. Acceptance criteria
+
+* I can start the app locally with Docker using one command.
+* I can start the app locally without Docker.
+* Prisma works with Prisma 7 config.
+* I can create a contract as User A.
+* I can add User B’s email and send the contract.
+* If Resend is not configured, the app still returns/displays the signing link for local testing.
+* User B can open the signing link and sign without an account.
+* If User B creates/logs into an account with the same email, they see the contract under “Contracts Sent to Me.”
+* After User B signs, User A sees the contract status update.
+* Audit events are created for sent, viewed, and signed.
+* README clearly explains startup, Docker, Prisma, env vars, email, Stripe, AWS, and future blockchain anchoring.
+* No PDF/DOCX upload is required.

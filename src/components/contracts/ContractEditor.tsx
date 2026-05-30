@@ -59,9 +59,9 @@ export function ContractEditor({
   }, [content, editor]);
 
   return (
-    <div className="rounded-2xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-zinc-800 dark:bg-zinc-950">
       {editable ? (
-        <div className="flex flex-wrap gap-2 border-b border-zinc-200 p-3 dark:border-zinc-800">
+        <div className="flex flex-wrap gap-2 border-b border-slate-200 p-3 dark:border-zinc-800">
           <Button size="sm" variant="ghost" onClick={() => editor?.chain().focus().toggleBold().run()}>Bold</Button>
           <Button size="sm" variant="ghost" onClick={() => editor?.chain().focus().toggleItalic().run()}>Italic</Button>
           <Button size="sm" variant="ghost" onClick={() => editor?.chain().focus().toggleBulletList().run()}>Bullets</Button>
@@ -70,7 +70,7 @@ export function ContractEditor({
         </div>
       ) : null}
       <EditorContent editor={editor} className={cn("min-h-[320px] px-4 py-4 prose prose-zinc max-w-none dark:prose-invert [&_.ProseMirror]:min-h-[320px] [&_.ProseMirror]:outline-none")} />
-      <div className="border-t border-zinc-200 px-4 py-3 text-xs text-zinc-500 dark:border-zinc-800">
+      <div className="border-t border-slate-200 px-4 py-3 text-xs text-slate-500 dark:border-zinc-800 dark:text-zinc-400">
         {editor?.storage.characterCount.characters() ?? 0} characters
       </div>
     </div>

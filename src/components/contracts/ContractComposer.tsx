@@ -78,8 +78,8 @@ export function ContractComposer({
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-zinc-950 dark:text-white">Contract details</h2>
-          <p className="text-sm text-zinc-500">Build clear, reusable agreements and keep every approval in one secure workflow.</p>
+          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Contract details</h2>
+          <p className="text-sm text-slate-500 dark:text-zinc-400">Build clear, reusable agreements and keep every approval in one secure workflow.</p>
         </CardHeader>
         <CardContent className="grid gap-4">
           <div className="space-y-2"><Label htmlFor="contract-title">Title</Label><Input id="contract-title" value={title} disabled={readonly} onChange={(event) => setTitle(event.target.value)} placeholder="Master service agreement" /></div>
@@ -88,14 +88,14 @@ export function ContractComposer({
       </Card>
       <Card>
         <CardHeader>
-          <h2 className="text-xl font-semibold text-zinc-950 dark:text-white">Contract body</h2>
+          <h2 className="text-xl font-semibold text-slate-950 dark:text-white">Contract body</h2>
         </CardHeader>
         <CardContent>
           <ContractEditor editable={!readonly} content={content} onChange={(nextContent, html) => { setContent(nextContent); setContentHtml(html); }} />
         </CardContent>
       </Card>
       <Card>
-        <CardHeader><h2 className="text-xl font-semibold text-zinc-950 dark:text-white">Variable library</h2></CardHeader>
+        <CardHeader><h2 className="text-xl font-semibold text-slate-950 dark:text-white">Variable library</h2></CardHeader>
         <CardContent>
           <ContractVariables value={variables} onChange={setVariables} />
         </CardContent>
