@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 const variants = {
-  default: "bg-zinc-100 text-zinc-700 dark:bg-zinc-900 dark:text-zinc-200",
-  draft: "bg-zinc-200 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200",
+  default: "bg-slate-100 text-slate-700 dark:bg-zinc-900 dark:text-zinc-200",
+  draft: "bg-slate-200 text-slate-700 dark:bg-zinc-800 dark:text-zinc-200",
   sent: "bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-200",
   signed: "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-200",
   finalized: "bg-violet-100 text-violet-700 dark:bg-violet-950/60 dark:text-violet-200",

@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #fafafa;
-  --foreground: #09090b;
-  --muted: #71717a;
-  --border: #e4e4e7;
+  --background: #f8fafc;
+  --foreground: #020617;
+  --muted: #64748b;
+  --border: #e2e8f0;
   --card: #ffffff;
   --signature-ink: #6366f1;
 }
@@ -28,6 +28,10 @@
 }
 
 html {
+  color-scheme: light;
+}
+
+html.dark {
   color-scheme: dark;
 }
 

@@ -29,8 +29,8 @@ export default async function DashboardPage() {
           { label: "Finalized this month", value: finalizedThisMonth },
         ].map((item) => (
           <Card key={item.label}>
-            <CardHeader><p className="text-sm text-zinc-500">{item.label}</p></CardHeader>
-            <CardContent><p className="text-3xl font-semibold text-zinc-950 dark:text-white">{item.value}</p></CardContent>
+            <CardHeader><p className="text-sm text-slate-500 dark:text-zinc-500">{item.label}</p></CardHeader>
+            <CardContent><p className="text-3xl font-semibold text-slate-950 dark:text-white">{item.value}</p></CardContent>
           </Card>
         ))}
       </div>
@@ -42,7 +42,7 @@ export default async function DashboardPage() {
 
       <Card>
         <CardHeader>
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-white">Recent contracts</h2>
+          <h2 className="text-lg font-semibold text-slate-950 dark:text-white">Recent contracts</h2>
         </CardHeader>
         <CardContent>
           <div className="overflow-x-auto">
@@ -58,7 +58,7 @@ export default async function DashboardPage() {
               <TableBody>
                 {recentContracts.map((contract) => (
                   <TableRow key={contract.id}>
-                    <TableCell><Link href={`/contracts/${contract.id}`} className="font-medium text-zinc-950 dark:text-white">{contract.title}</Link></TableCell>
+                    <TableCell><Link href={`/contracts/${contract.id}`} className="font-medium text-slate-950 dark:text-white">{contract.title}</Link></TableCell>
                     <TableCell><ContractStatusBadge status={contract.status} /></TableCell>
                     <TableCell>{contract.participants.length}</TableCell>
                     <TableCell>{formatDate(contract.updatedAt)}</TableCell>

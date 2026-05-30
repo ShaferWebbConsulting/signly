@@ -9,7 +9,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
     <SessionProvider>
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
         {children}
-        <Toaster position="top-right" toastOptions={{ className: "!bg-zinc-900 !text-white dark:!bg-zinc-800" }} />
+        <Toaster position="top-right" toastOptions={{ className: "!border !border-slate-200 !bg-white !text-slate-950 dark:!border-zinc-800 dark:!bg-zinc-900 dark:!text-white" }} />
       </ThemeProvider>
     </SessionProvider>
   );

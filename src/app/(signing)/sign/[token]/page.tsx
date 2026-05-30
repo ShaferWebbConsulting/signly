@@ -16,8 +16,8 @@ export default async function SigningPage({ params }: { params: Promise<{ token:
     <div className="mx-auto flex min-h-screen max-w-5xl flex-col gap-6 px-6 py-16">
       <Card>
         <CardHeader>
-          <h1 className="text-3xl font-semibold text-zinc-950 dark:text-white">Sign contract</h1>
-          <p className="text-sm text-zinc-500">You are signing as {participant.name} ({participant.email}).</p>
+          <h1 className="text-3xl font-semibold text-slate-950 dark:text-white">Sign contract</h1>
+          <p className="text-sm text-slate-500 dark:text-zinc-500">You are signing as {participant.name} ({participant.email}).</p>
         </CardHeader>
         <CardContent>
           <div className="prose max-w-none dark:prose-invert" dangerouslySetInnerHTML={{ __html: participant.contract.contentHtml }} />

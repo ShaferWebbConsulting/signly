@@ -16,9 +16,9 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full border-b border-zinc-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 lg:w-72 lg:border-b-0 lg:border-r lg:p-6">
-      <Link href="/dashboard" className="mb-8 flex items-center gap-3 text-lg font-semibold text-zinc-950 dark:text-white">
-        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-500 text-white">S</span>
+    <aside className="w-full border-b border-slate-200 bg-white/80 p-4 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/70 lg:w-72 lg:border-b-0 lg:border-r lg:p-6">
+      <Link href="/dashboard" className="mb-8 flex items-center gap-3 text-lg font-semibold text-slate-950 dark:text-white">
+        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-blue-600 text-white">S</span>
         Signly
       </Link>
       <nav className="grid gap-2">
@@ -32,8 +32,8 @@ export function Sidebar() {
               className={cn(
                 "flex items-center gap-3 rounded-xl px-3 py-2 text-sm font-medium transition",
                 active
-                  ? "bg-indigo-500/10 text-indigo-500"
-                  : "text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900",
+                  ? "bg-blue-100 text-blue-700 dark:bg-blue-500/10 dark:text-blue-300"
+                  : "text-slate-600 hover:bg-slate-100 dark:text-zinc-300 dark:hover:bg-zinc-900",
               )}
             >
               <Icon className="h-4 w-4" />

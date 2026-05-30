@@ -27,10 +27,10 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-semibold text-zinc-950 dark:text-white">{contract.title}</h1>
+            <h1 className="text-2xl font-semibold text-slate-950 dark:text-white">{contract.title}</h1>
             <ContractStatusBadge status={contract.status} />
           </div>
-          <p className="mt-2 text-sm text-zinc-500">Last updated {formatDate(contract.updatedAt)}</p>
+          <p className="mt-2 text-sm text-slate-500 dark:text-zinc-500">Last updated {formatDate(contract.updatedAt)}</p>
         </div>
         <ContractActions contractId={contract.id} status={contract.status} />
       </div>
@@ -51,10 +51,10 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-zinc-950 dark:text-white">Participants</h2>
-            <p className="text-sm text-zinc-500">Manage signing roles and recipient routing.</p>
+            <h2 className="text-lg font-semibold text-slate-950 dark:text-white">Participants</h2>
+            <p className="text-sm text-slate-500 dark:text-zinc-500">Manage signing roles and recipient routing.</p>
           </div>
-          <Link href={`/contracts/${contract.id}/participants`} className="text-sm font-medium text-indigo-500">Open full participant manager</Link>
+          <Link href={`/contracts/${contract.id}/participants`} className="text-sm font-medium text-blue-600 dark:text-blue-400">Open full participant manager</Link>
         </CardHeader>
         <CardContent>
           <ParticipantForm contractId={contract.id} participants={contract.participants} />
@@ -63,16 +63,16 @@ export default async function ContractDetailPage({ params }: { params: Promise<{
 
       <Card>
         <CardHeader>
-          <h2 className="text-lg font-semibold text-zinc-950 dark:text-white">Audit trail</h2>
+          <h2 className="text-lg font-semibold text-slate-950 dark:text-white">Audit trail</h2>
         </CardHeader>
         <CardContent className="space-y-3">
           {contract.auditEvents.map((event) => (
-            <div key={event.id} className="rounded-2xl border border-zinc-200 p-4 text-sm dark:border-zinc-800">
+            <div key={event.id} className="rounded-2xl border border-slate-200 p-4 text-sm dark:border-zinc-800">
               <div className="flex items-center justify-between gap-3">
-                <span className="font-medium text-zinc-950 dark:text-white">{event.eventType}</span>
-                <span className="text-zinc-500">{formatDate(event.createdAt)}</span>
+                <span className="font-medium text-slate-950 dark:text-white">{event.eventType}</span>
+                <span className="text-slate-500 dark:text-zinc-500">{formatDate(event.createdAt)}</span>
               </div>
-              <p className="mt-1 text-zinc-500">{event.ipAddress ?? "No IP captured"} · {event.userAgent ?? "No user agent captured"}</p>
+              <p className="mt-1 text-slate-500 dark:text-zinc-500">{event.ipAddress ?? "No IP captured"} · {event.userAgent ?? "No user agent captured"}</p>
             </div>
           ))}
         </CardContent>
