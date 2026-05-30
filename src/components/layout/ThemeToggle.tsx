@@ -18,13 +18,20 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={toggle}
-      aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
-    >
-      {dark ? <SunMedium className="h-4 w-4" /> : <MoonStar className="h-4 w-4" />}
-    </Button>
+    <div className="flex items-center gap-1">
+      {process.env.NODE_ENV === "development" && (
+        <span className="text-xs text-slate-500 dark:text-zinc-500">
+          theme: {resolvedTheme}
+        </span>
+      )}
+      <Button
+        variant="ghost"
+        size="icon"
+        onClick={toggle}
+        aria-label={dark ? "Switch to light mode" : "Switch to dark mode"}
+      >
+        {dark ? <SunMedium className="h-4 w-4" /> : <MoonStar className="h-4 w-4" />}
+      </Button>
+    </div>
   );
 }

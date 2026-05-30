@@ -13,7 +13,7 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-950 dark:bg-gradient-to-b dark:from-zinc-950 dark:via-zinc-950 dark:to-indigo-950/40 dark:text-white">
+    <main className="min-h-screen bg-slate-50 text-slate-950 dark:bg-zinc-950 dark:text-white">
       <div className="mx-auto flex max-w-6xl justify-end px-6 pt-6">
         <ThemeToggle />
       </div>
